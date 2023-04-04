@@ -28,12 +28,31 @@ public class Simulation {
         }
     }
 
-    public void loopUntilPlayerSucceed() {
-        logger.log("Starting the game...");
-        while (!nextRound()) {
-            logger.log("Next round...");
-        }
-        logger.log("End of game.");
+
+    public void loopUntilPlayerSucceed(int maxIterations) {
+    long startTime = System.currentTimeMillis();
+
+    int iteration = 0;
+    boolean guessed = false;
+
+    while (!guessed && iteration < maxIterations) {
+        guessed = nextRound();
+        iteration++;
     }
+
+    long endTime = System.currentTimeMillis();
+    long elapsedTime = endTime - startTime;
+
+    if(!(iteration < maxIterations)) {
+        logger.log("Game finished in " + elapsedTime / 1000 + " mm:ss.SSS, with " + iteration + " iterations (limit reached)");
+    }
+    else{
+        logger.log("Game finished in " + elapsedTime / 1000 + " mm:ss.SSS, with " + iteration + " iterations");
+    }
+    if (!guessed) {
+        logger.log("The player failed to guess the number");
+    }
+}
+
 }
 
