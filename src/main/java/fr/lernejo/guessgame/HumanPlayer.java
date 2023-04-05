@@ -20,12 +20,13 @@ public class HumanPlayer implements Player {
         return scanner.nextLong();
     }
 
+    //take a boolean islower
     @Override
     public void respond(boolean lowerOrGreater) {
         if (lowerOrGreater) {
-            logger.log("The number to guess is lower than your guess.");
-        } else {
             logger.log("The number to guess is greater than your guess.");
+        } else {
+            logger.log("The number to guess is lower than your guess.");
         }
     }
 }

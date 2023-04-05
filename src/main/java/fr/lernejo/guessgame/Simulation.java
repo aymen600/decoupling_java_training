@@ -1,5 +1,6 @@
 package fr.lernejo.guessgame;
 
+import java.time.Duration;
 import fr.lernejo.logger.Logger;
 import fr.lernejo.logger.LoggerFactory;
 
@@ -30,29 +31,39 @@ public class Simulation {
 
 
     public void loopUntilPlayerSucceed(int maxIterations) {
-    long startTime = System.currentTimeMillis();
+        long startTime = System.currentTimeMillis();
 
-    int iteration = 0;
-    boolean guessed = false;
+        int iteration = 0;
+        boolean guessed = false;
 
-    while (!guessed && iteration < maxIterations) {
-        guessed = nextRound();
-        iteration++;
+        while (!guessed && iteration < maxIterations) {
+            guessed = nextRound();
+            iteration++;
+        }
+
+        long endTime = System.currentTimeMillis();
+        long elapsedTime = endTime - startTime;
+
+        // Convertir le nombre de secondes en durée
+        Duration duration = Duration.ofMillis(elapsedTime);
+
+        // Récupérer les minutes, secondes et millisecondes de la durée
+        long minutes = duration.toMinutes();
+        long remainingSeconds = duration.minusMinutes(minutes).getSeconds();
+        long millis = duration.minusMinutes(minutes).minusSeconds(remainingSeconds).toMillis();
+
+        // Formater la durée sous forme de chaîne de caractères au format mm:ss.SSS
+        String formattedDuration = String.format("%02d:%02d.%03d", minutes, remainingSeconds, millis);
+
+        if(!(iteration < maxIterations)) {
+            logger.log("Game finished in " + formattedDuration + " with " + iteration + " iterations (limit reached)");
+        }
+        else{
+            logger.log("Game finished in " + formattedDuration + " with " + iteration + " iterations");
+        }
+        if (!guessed) {
+            logger.log("The player failed to guess the number");
+        }
     }
 
-    long endTime = System.currentTimeMillis();
-    long elapsedTime = endTime - startTime;
-
-    if(!(iteration < maxIterations)) {
-        logger.log("Game finished in " + elapsedTime / 1000 + " mm:ss.SSS, with " + iteration + " iterations (limit reached)");
-    }
-    else{
-        logger.log("Game finished in " + elapsedTime / 1000 + " mm:ss.SSS, with " + iteration + " iterations");
-    }
-    if (!guessed) {
-        logger.log("The player failed to guess the number");
-    }
 }
-
-}
-
