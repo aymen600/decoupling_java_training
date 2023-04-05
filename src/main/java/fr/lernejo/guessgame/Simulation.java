@@ -31,6 +31,12 @@ public class Simulation {
 
 
     public void loopUntilPlayerSucceed(int maxIterations) {
+        logger.log("Starting the game ...");
+        while (!nextRound()){
+            logger.log("Next round... ");
+        }
+        logger.log("End of game");
+        /*
         long startTime = System.currentTimeMillis();
 
         int iteration = 0;
@@ -64,6 +70,10 @@ public class Simulation {
         if (!guessed) {
             logger.log("The player failed to guess the number");
         }
+
+         */
+
     }
+
 
 }
