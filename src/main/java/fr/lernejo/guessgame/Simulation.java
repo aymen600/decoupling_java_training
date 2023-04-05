@@ -21,7 +21,7 @@ public class Simulation {
     private boolean nextRound() {
         long guess = player.askNextGuess();
         if (guess == numberToGuess) {
-            logger.log("You guessed the number!");
+            logger.log("You win !");
             return true;
         } else {
             player.respond(guess < numberToGuess);
@@ -31,12 +31,6 @@ public class Simulation {
 
 
     public void loopUntilPlayerSucceed(int maxIterations) {
-        logger.log("Starting the game ...");
-        while (!nextRound()){
-            logger.log("Next round... ");
-        }
-        logger.log("End of game");
-        /*
         long startTime = System.currentTimeMillis();
 
         int iteration = 0;
@@ -62,16 +56,14 @@ public class Simulation {
         String formattedDuration = String.format("%02d:%02d.%03d", minutes, remainingSeconds, millis);
 
         if(!(iteration < maxIterations)) {
-            logger.log("Game finished in " + formattedDuration + " with " + iteration + " iterations (limit reached)");
+            logger.log("End ! the Game finished in " + formattedDuration + " with " + iteration + " iterations (limit reached)");
         }
         else{
-            logger.log("Game finished in " + formattedDuration + " with " + iteration + " iterations");
+            logger.log("End ! The Game finished in " + formattedDuration + " with " + iteration + " iterations");
         }
         if (!guessed) {
-            logger.log("The player failed to guess the number");
+            logger.log("End ! The player failed to guess the number");
         }
-
-         */
 
     }
 
