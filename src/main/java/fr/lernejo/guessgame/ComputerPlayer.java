@@ -15,10 +15,10 @@ public class ComputerPlayer implements Player {
     public void respond(boolean lowerOrGreater) {
         this.lowerOrGreater = lowerOrGreater;
         if (lowerOrGreater) {
-            minGuess = nextGuess;
+            minGuess = nextGuess + 1;
             nextGuess = (minGuess + maxGuess) / 2;
         } else {
-            maxGuess = nextGuess;
+            maxGuess = nextGuess - 1;
             nextGuess = (maxGuess + minGuess) / 2;
         }
     }
